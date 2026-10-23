@@ -70,13 +70,16 @@
     const draw = () => {
       const term = (q?.value || "").toLowerCase();
       const list = all.filter((i) => (cat === "All" || i.category === cat) && (i.title + i.summary + i.tags.join(" ")).toLowerCase().includes(term));
-      gallery.innerHTML = list.length ? list.map(card).join("") : `<p class="empty">Nothing matches that filter yet.</p>`;
+      gallery.innerHTML = list.length ? list.map(card).join("") : `<p class="empty">${all.length ? "Nothing matches that search." : "No items yet. Add one to js/data.js."}</p>`;
       reveal();
     };
     chipsEl?.addEventListener("click", (e) => { const b = e.target.closest(".chip"); if (!b) return; cat = b.textContent; $$(".chip", chipsEl).forEach((c) => c.setAttribute("aria-pressed", c === b)); draw(); });
     q?.addEventListener("input", draw);
     draw();
   }
+
+  // collapse section list on small screens
+  const side = $("#sideBox"); if (side && matchMedia("(max-width:900px)").matches) side.open = false;
 
   // detail dialog
   const dlg = $("#detail");
