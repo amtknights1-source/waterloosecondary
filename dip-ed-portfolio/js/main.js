@@ -61,8 +61,8 @@
   // filterable gallery: <div id="gallery" data-category="Lesson plan"> (omit for all)
   const gallery = $("#gallery");
   if (gallery) {
-    const fixed = gallery.dataset.category;
-    const all = P.items.filter((i) => !fixed || i.category === fixed);
+    const fixed = (gallery.dataset.category || "").split(",").filter(Boolean);
+    const all = P.items.filter((i) => !fixed.length || fixed.includes(i.category));
     const chipsEl = $("#chips"), q = $("#q");
     let cat = "All";
     const cats = ["All", ...new Set(all.map((i) => i.category))];
