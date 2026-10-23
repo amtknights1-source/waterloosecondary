@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home | DipEd Portfolio</title>
+<meta name="description" content="Postgraduate Diploma in Education portfolio showcasing lesson plans, reflections and teaching practice.">
+<meta name="theme-color" content="#0f6b63">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div id="progress" aria-hidden="true"></div>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="logo" href="index.html"><span data-owner="name">Your Name</span> <span>· DipEd</span></a>
+    <button class="icon-btn menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav" aria-label="Toggle menu">☰</button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="about.html">About</a>
+      <a href="lesson-plans.html">Lesson Plans</a>
+      <a href="reflections.html">Reflections</a>
+      <a href="teaching-practice.html">Teaching Practice</a>
+      <a href="evidence.html">All Evidence</a>
+      <a href="contact.html">Contact</a>
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle theme">☾</button>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<section class="hero"><div class="wrap hero-grid">
+  <div>
+    <p class="eyebrow">Postgraduate Diploma in Education</p>
+    <h1>Becoming a reflective, tech-confident teacher.</h1>
+    <p class="lead">A collection of work from my DipEd journey: planning, teaching, assessing and reflecting. Specialising in <span data-owner="subjects">Information Technology</span>.</p>
+    <div class="actions"><a class="btn" href="evidence.html">Browse the evidence</a><a class="btn ghost" href="about.html">My teaching philosophy</a></div>
+  </div>
+  <aside class="hero-card" aria-label="Profile summary">
+    <div class="avatar" aria-hidden="true">YN</div>
+    <h2 data-owner="name">Your Name</h2>
+    <p data-owner="role">DipEd candidate</p>
+    <p class="meta"><span data-owner="institution">Your University</span> · <span data-owner="year">2025-2026</span></p>
+  </aside>
+</div></section>
+<section class="block"><div class="wrap"><div class="notice">This site contains <strong>sample placeholder content</strong> (dashed cards). Edit <code>js/data.js</code> and the page text to add your real work.</div>
+<div class="section-head"><h2>At a glance</h2></div><div class="stat-row" id="stats"></div></div></section>
+<section class="block"><div class="wrap"><div class="section-head"><h2>Featured work</h2><p>A selection of recent artefacts.</p></div><div class="grid" id="featured"></div></div></section>
+<section class="block"><div class="wrap"><div class="section-head"><h2>Programme modules</h2></div><div class="grid" id="modules"></div></div></section>
+<section class="block"><div class="wrap"><div class="section-head"><h2>My journey</h2></div><ol class="timeline" id="timeline"></ol></div></section>
+</main>
+<dialog id="detail" aria-label="Item details"><div class="dlg"><button class="icon-btn dlg-close" id="detailClose" type="button" aria-label="Close">✕</button><div id="detailBody"></div></div></dialog>
+<footer><div class="wrap foot"><span>© <span data-year></span> <span data-owner="name">Your Name</span> · Postgraduate Diploma in Education</span><a href="#main">Back to top ↑</a></div></footer>
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
