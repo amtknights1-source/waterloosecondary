@@ -43,7 +43,7 @@
   const mail = $("#mailBtn"); if (mail && P.owner.email) { mail.href = "mailto:" + P.owner.email; mail.textContent = P.owner.email; }
 
   // ---- section progress (stored only in this browser)
-  const TOTAL = 14;
+  const TOTAL = $$(".side-box li").length || +($("#progMeter")?.getAttribute("aria-valuemax")) || 15;
   const getDone = () => { try { return JSON.parse(store.get("done")) || []; } catch { return []; } };
   const paintDone = () => {
     const done = getDone();
@@ -61,10 +61,10 @@
   paintDone();
 
   // ---- cards
-  const CAT_IMG = { "Purpose Statement": "purpose-statement", "Philosophy": "initial-philosophy", "Unit of instruction": "sample-unit", "Lesson plan": "lesson-plans", "Task analysis": "task-analysis", "Scaffolding": "instructional-scaffolding", "Peer discussion": "peer-discussion", "Technology": "technology", "Performance assessment": "performance-assessment", "Classroom assessment": "classroom-assessment", "Curriculum integration": "curriculum-integration", "Adaptation": "adaptation-to-change", "Instructional objectives": "instructional-objectives", "Reflection": "reflective-summary" };
+  const CAT_IMG = { "Purpose Statement": "purpose-statement", "Philosophy": "initial-philosophy", "Unit of instruction": "sample-unit", "Lesson plan": "lesson-plans", "Task analysis": "task-analysis", "Scaffolding": "instructional-scaffolding", "Peer discussion": "peer-discussion", "Technology": "technology", "Performance assessment": "performance-assessment", "Classroom assessment": "classroom-assessment", "Curriculum integration": "curriculum-integration", "Adaptation": "adaptation-to-change", "Instructional objectives": "instructional-objectives", "Reflection": "reflective-summary", "Teaching practice": "teaching-practice" };
   const card = (i) => `
     <article class="card reveal${i.placeholder ? " placeholder" : ""}">
-      ${CAT_IMG[i.category] ? `<img class="thumb" src="assets/img/${CAT_IMG[i.category]}.svg" alt="" width="640" height="360" loading="lazy" decoding="async">` : ""}
+      ${i.thumb ? `<img class="thumb photo" src="${esc(i.thumb)}" alt="" width="640" height="480" loading="lazy" decoding="async">` : CAT_IMG[i.category] ? `<img class="thumb" src="assets/img/${CAT_IMG[i.category]}.svg" alt="" width="640" height="360" loading="lazy" decoding="async">` : ""}
       <div><span class="tag">${esc(i.category)}</span></div>
       <h3>${esc(i.title)}</h3>
       <p class="meta">${i.date ? esc(i.date) + " · " : ""}${i.tags.map(esc).join(", ")}</p>
@@ -128,7 +128,13 @@
     e.preventDefault(); opener = a;
     const i = P.items.find((x) => x.id === a.dataset.open); if (!i) return;
     $("#detailBody").innerHTML = `<span class="tag">${esc(i.category)}</span><h2>${esc(i.title)}</h2><p class="meta">${i.date ? esc(i.date) + " · " : ""}${i.tags.map(esc).join(", ")}</p><p>${esc(i.detail)}</p>` +
-      (i.file ? `<p><a class="btn" href="${esc(i.file)}" download>Download document</a></p>` : "");
+      (/\.(jpe?g|png)$/i.test(i.file || "") ? `<p><img class="dlg-img" src="${esc(i.file)}" alt="${esc(i.title)}"></p>` : "") + (i.file ? `<p><a class="btn" href="${esc(i.file)}" ${/\.(jpe?g|png)$/i.test(i.file) ? "" : "download"} target="_blank" rel="noopener">${/\.(jpe?g|png)$/i.test(i.file) ? "Open full-size photo" : "Download document"}</a></p>` : "");
+    dlg.showModal();
+  });
+  document.addEventListener("click", (e) => {
+    const pb = e.target.closest("[data-photo]"); if (!pb || !dlg) return;
+    opener = pb;
+    $("#detailBody").innerHTML = `<img class="dlg-img" src="${esc(pb.dataset.photo)}" alt="${esc(pb.dataset.alt)}"><p class="meta">${esc(pb.dataset.cap)}</p>`;
     dlg.showModal();
   });
   $("#detailClose")?.addEventListener("click", () => dlg.close());
