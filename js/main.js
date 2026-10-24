@@ -128,7 +128,8 @@
     e.preventDefault(); opener = a;
     const i = P.items.find((x) => x.id === a.dataset.open); if (!i) return;
     $("#detailBody").innerHTML = `<span class="tag">${esc(i.category)}</span><h2>${esc(i.title)}</h2><p class="meta">${i.date ? esc(i.date) + " · " : ""}${i.tags.map(esc).join(", ")}</p><p>${esc(i.detail)}</p>` +
-      (/\.(jpe?g|png)$/i.test(i.file || "") ? `<p><img class="dlg-img" src="${esc(i.file)}" alt="${esc(i.title)}"></p>` : "") + (i.file ? `<p><a class="btn" href="${esc(i.file)}" ${/\.(jpe?g|png)$/i.test(i.file) ? "" : "download"} target="_blank" rel="noopener">${/\.(jpe?g|png)$/i.test(i.file) ? "Open full-size photo" : "Download document"}</a></p>` : "");
+      (/\.(jpe?g|png)$/i.test(i.file || "") ? `<p><img class="dlg-img" src="${esc(i.file)}" alt="${esc(i.title)}"></p>` : "") +
+      (i.file ? (() => { const f = i.file, img = /\.(jpe?g|png)$/i.test(f), media = /\.(mp4|m4a)$/i.test(f); return `<p><a class="btn" href="${esc(f)}" ${img || media ? "" : "download"} target="_blank" rel="noopener">${img ? "Open full-size photo" : media ? "Play or open file" : "Download document"}</a></p>`; })() : "");
     dlg.showModal();
   });
   document.addEventListener("click", (e) => {
