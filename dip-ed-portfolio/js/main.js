@@ -49,9 +49,9 @@
     const done = getDone();
     $$("[data-tick]").forEach((el) => { const on = done.includes(el.dataset.tick); if (el.classList.contains("done-flag")) el.hidden = !on; else el.classList.toggle("on", on); });
     const slug = document.body.dataset.slug, btn = $("[data-done]");
-    if (btn && slug) { const on = done.includes(slug); btn.setAttribute("aria-pressed", on); btn.textContent = on ? "✓ Marked complete (click to undo)" : "Mark section as complete"; }
+    if (btn && slug) { const on = done.includes(slug); btn.setAttribute("aria-pressed", on); btn.textContent = on ? "✓ Marked as read (click to undo)" : "Mark section as read"; }
     const fill = $("#progFill"), meter = $("#progMeter"), txt = $("#progText");
-    if (fill) { fill.style.width = (done.length / TOTAL) * 100 + "%"; meter.setAttribute("aria-valuenow", done.length); txt.textContent = `${done.length} of ${TOTAL} sections marked complete`; }
+    if (fill) { fill.style.width = (done.length / TOTAL) * 100 + "%"; meter.setAttribute("aria-valuenow", done.length); txt.textContent = `${done.length} of ${TOTAL} sections marked as read`; }
   };
   $("[data-done]")?.addEventListener("click", (e) => {
     const slug = e.currentTarget.dataset.done, done = getDone(), i = done.indexOf(slug);
@@ -67,7 +67,7 @@
       ${CAT_IMG[i.category] ? `<img class="thumb" src="assets/img/${CAT_IMG[i.category]}.svg" alt="" width="640" height="360" loading="lazy" decoding="async">` : ""}
       <div><span class="tag">${esc(i.category)}</span></div>
       <h3>${esc(i.title)}</h3>
-      <p class="meta">${esc(i.date)} · ${i.tags.map(esc).join(", ")}</p>
+      <p class="meta">${i.date ? esc(i.date) + " · " : ""}${i.tags.map(esc).join(", ")}</p>
       <p>${esc(i.summary)}</p>
       <a class="more" href="#" data-open="${esc(i.id)}">View details →</a>
     </article>`;
@@ -92,12 +92,13 @@
     const draw = () => {
       const term = (q?.value || "").toLowerCase();
       const list = all.filter((i) => (cat === "All" || i.category === cat) && (i.title + i.summary + i.tags.join(" ")).toLowerCase().includes(term));
-      gallery.innerHTML = list.length ? list.map(card).join("") : `<p class="empty">${all.length ? "Nothing matches that search." : "No items yet. Add one to js/data.js."}</p>`;
+      gallery.innerHTML = list.length ? list.map(card).join("") : `<p class="empty">${all.length ? "Nothing matches that search." : "Documents for this section are coming soon."}</p>`;
       if (count) count.textContent = `${list.length} item${list.length === 1 ? "" : "s"} shown`;
       reveal();
     };
     chipsEl?.addEventListener("click", (e) => { const b = e.target.closest(".chip"); if (!b) return; cat = b.textContent; $$(".chip", chipsEl).forEach((c) => c.setAttribute("aria-pressed", c === b)); draw(); });
     q?.addEventListener("input", draw);
+    if (!all.length) { const t = gallery.closest("section")?.querySelector(".tools"); if (t) t.hidden = true; }
     draw();
   }
 
@@ -126,8 +127,8 @@
     const a = e.target.closest("[data-open]"); if (!a || !dlg) return;
     e.preventDefault(); opener = a;
     const i = P.items.find((x) => x.id === a.dataset.open); if (!i) return;
-    $("#detailBody").innerHTML = `<span class="tag">${esc(i.category)}</span><h2>${esc(i.title)}</h2><p class="meta">${esc(i.date)} · ${i.tags.map(esc).join(", ")}</p><p>${esc(i.detail)}</p>` +
-      (i.file ? `<p><a class="btn" href="${esc(i.file)}" target="_blank" rel="noopener">Open document</a></p>` : `<p class="notice">No file attached yet. Add one to the <code>files/</code> folder and set <code>file</code> in <code>js/data.js</code>.</p>`);
+    $("#detailBody").innerHTML = `<span class="tag">${esc(i.category)}</span><h2>${esc(i.title)}</h2><p class="meta">${i.date ? esc(i.date) + " · " : ""}${i.tags.map(esc).join(", ")}</p><p>${esc(i.detail)}</p>` +
+      (i.file ? `<p><a class="btn" href="${esc(i.file)}" download>Download document</a></p>` : "");
     dlg.showModal();
   });
   $("#detailClose")?.addEventListener("click", () => dlg.close());

@@ -184,3 +184,14 @@ body>.wrap>.page-head,main>.wrap>.page-head{padding-left:0}
 .foot-links{display:flex;gap:16px;flex-wrap:wrap}
 .privacy{flex-basis:100%;margin:8px 0 0;font-size:.85rem}
 .nav a{white-space:nowrap}
+
+/* ---- written content ---- */
+.writeup{max-width:72ch;margin:32px 0;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px clamp(18px,4vw,36px);box-shadow:var(--shadow)}
+.writeup>h2:first-child{margin-top:0}
+.writeup h2{margin-top:1.6em}
+.writeup h3{margin:1.6em 0 .5em;font-size:1.1rem;color:var(--brand);line-height:1.4}
+.writeup p{margin:0 0 1em;line-height:1.75}
+.writeup a{overflow-wrap:anywhere}
+.writeup .dl{margin:1.6em 0 0;padding-top:1em;border-top:1px solid var(--line)}
+.sec-head + .writeup{margin-top:0}
+.tools[hidden]{display:none}
