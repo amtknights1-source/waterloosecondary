@@ -115,7 +115,7 @@
     const i = P.items.find((x) => x.id === a.dataset.open); if (!i) return;
     $("#detailBody").innerHTML = `<span class="tag">${esc(i.category)}</span><h2>${esc(i.title)}</h2><p class="meta">${i.date ? esc(i.date) + " · " : ""}${i.tags.map(esc).join(", ")}</p><p>${esc(i.detail)}</p>` +
       (/\.(jpe?g|png)$/i.test(i.file || "") ? `<p><img class="dlg-img" src="${esc(i.file)}" alt="${esc(i.title)}"></p>` : "") +
-      (i.file ? (() => { const f = i.file, img = /\.(jpe?g|png)$/i.test(f), media = /\.(mp4|m4a)$/i.test(f); return `<p><a class="btn" href="${esc(f)}" ${img || media ? "" : "download"} target="_blank" rel="noopener">${img ? "Open full-size photo" : media ? "Play or open file" : "Download document"}</a></p>`; })() : "");
+      (i.file ? (() => { const f = i.file, web = /^https?:/i.test(f), img = /\.(jpe?g|png)$/i.test(f), media = /\.(mp4|m4a)$/i.test(f); return `<p><a class="btn" href="${esc(f)}" ${img || media || web ? "" : "download"} target="_blank" rel="noopener">${web ? "Watch on YouTube" : img ? "Open full-size photo" : media ? "Play or open file" : "Download document"}</a></p>`; })() : "");
     dlg.showModal();
   });
   document.addEventListener("click", (e) => {
@@ -127,6 +127,13 @@
   $("#detailClose")?.addEventListener("click", () => dlg.close());
   dlg?.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
   dlg?.addEventListener("close", () => opener?.focus());
+
+  // ---- YouTube: load the player only when Play is pressed
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest(".yt-play"); if (!b) return;
+    const box = b.closest(".yt"), id = box.dataset.yt;
+    box.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?autoplay=1&rel=0" title="Transformations video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
+  });
 
   reveal();
 })();
