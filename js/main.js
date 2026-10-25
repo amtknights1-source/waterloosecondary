@@ -66,7 +66,7 @@
     const all = P.items.filter((i) => !fixed.length || fixed.includes(i.category));
     const chipsEl = $("#chips"), q = $("#q"), count = $("#count");
     let cat = "All";
-    const cats = ["All", ...new Set(all.map((i) => i.category))];
+    const cats = ["All", ...PARTS.filter((c) => all.some((i) => i.category === c))];
     if (chipsEl) chipsEl.innerHTML = (cats.length > 2 ? cats : []).map((c) => `<button class="chip" type="button" aria-pressed="${c === "All"}">${esc(c)}</button>`).join("");
     const draw = () => {
       const term = (q?.value || "").toLowerCase();
