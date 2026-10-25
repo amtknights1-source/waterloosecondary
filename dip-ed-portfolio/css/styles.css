@@ -226,3 +226,17 @@ dialog::backdrop{background:rgba(8,16,30,.7)}
 
 .sec-head .eyebrow{margin-top:22px}
 .page-head + section.block{padding-top:4px}
+
+/* ---------- documents listed within each part ---------- */
+.docs-h{margin:8px 0 14px;font-size:1.3rem}
+.toc.docs{margin-bottom:40px}
+.subnav{list-style:none;margin:0;padding:0 0 8px 14px;border-left:3px solid var(--gold);margin-left:.6rem}
+.side-box ul.subnav li{border-bottom:0}
+.side-box .subnav a{font-size:.9rem;padding:.4rem .6rem;border-left:0}
+.side-box .subnav a[aria-current="page"]{background:var(--tint);color:var(--navy);font-weight:700}
+:root[data-theme="dark"] .side-box .subnav a[aria-current="page"]{color:#fff}
+.sublinks{list-style:none;margin:-6px 0 0;padding:0 8px 16px;display:flex;flex-wrap:wrap;gap:4px 22px;font-family:var(--sans);font-size:.88rem}
+.sublinks li{margin:0}
+.sublinks a{display:inline;padding:0;text-decoration:underline;color:var(--link);font-weight:500}
+.sublinks a::before{content:"› ";color:var(--gold)}
+.toc li:has(.sublinks) a:hover{background:transparent}
