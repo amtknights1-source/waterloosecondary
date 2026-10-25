@@ -51,7 +51,7 @@
       <h3>${esc(i.title)}</h3>
       <p class="meta">${i.date ? esc(i.date) + " · " : ""}${i.tags.map(esc).join(", ")}</p>
       <p>${esc(i.summary)}</p>
-      <a class="more" href="#" data-open="${esc(i.id)}">View details →</a>
+      <a class="more" href="${esc(i.page)}">View in portfolio →</a>
     </article>`;
 
   const stats = $("#stats");
@@ -109,15 +109,6 @@
 
   // ---- detail dialog
   const dlg = $("#detail"); let opener = null;
-  document.addEventListener("click", (e) => {
-    const a = e.target.closest("[data-open]"); if (!a || !dlg) return;
-    e.preventDefault(); opener = a;
-    const i = P.items.find((x) => x.id === a.dataset.open); if (!i) return;
-    $("#detailBody").innerHTML = `<span class="tag">${esc(i.category)}</span><h2>${esc(i.title)}</h2><p class="meta">${i.date ? esc(i.date) + " · " : ""}${i.tags.map(esc).join(", ")}</p><p>${esc(i.detail)}</p>` +
-      (/\.(jpe?g|png)$/i.test(i.file || "") ? `<p><img class="dlg-img" src="${esc(i.file)}" alt="${esc(i.title)}"></p>` : "") +
-      (i.file ? (() => { const f = i.file, web = /^https?:/i.test(f), img = /\.(jpe?g|png)$/i.test(f), media = /\.(mp4|m4a)$/i.test(f); return `<p><a class="btn" href="${esc(f)}" ${img || media || web ? "" : "download"} target="_blank" rel="noopener">${web ? "Watch on YouTube" : img ? "Open full-size photo" : media ? "Play or open file" : "Download document"}</a></p>`; })() : "");
-    dlg.showModal();
-  });
   document.addEventListener("click", (e) => {
     const pb = e.target.closest("[data-photo]"); if (!pb || !dlg) return;
     opener = pb;
