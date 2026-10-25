@@ -297,3 +297,10 @@ footer{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.o
 .pull p.src{grid-column:2;font-family:var(--sans);font-size:.82rem;font-style:normal;color:var(--muted)}
 .orn .orn-scale{width:30px;height:30px;transform:none;border:0;display:block}
 .orn .orn-scale .scale-ico{width:30px;height:30px}
+.writeup table.wide{min-width:1600px;table-layout:auto}
+.writeup table.wide th,.writeup table.wide td{min-width:170px;overflow-wrap:normal;word-break:normal}
+.writeup table.wide th:first-child,.writeup table.wide td:first-child{min-width:48px;width:48px;text-align:center}
+.writeup table.wide th:nth-child(2),.writeup table.wide td:nth-child(2){min-width:130px}
+.writeup table.wide td p{line-height:1.5;margin:0 0 .6em}
+.writeup table.wide td,.writeup table.wide td p{overflow-wrap:normal}
+.writeup .ask{font-style:italic;color:var(--muted)}
