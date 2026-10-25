@@ -240,3 +240,29 @@ dialog::backdrop{background:rgba(8,16,30,.7)}
 .sublinks a{display:inline;padding:0;text-decoration:underline;color:var(--link);font-weight:500}
 .sublinks a::before{content:"› ";color:var(--gold)}
 .toc li:has(.sublinks) a:hover{background:transparent}
+
+/* ---------- original graphics: line icons, pattern, ornaments ---------- */
+.ico-svg{width:100%;height:100%;display:block;color:var(--navy)}
+.ico-svg .g{stroke:var(--gold)}
+:root[data-theme="dark"] .ico-svg{color:#e7ebf2}
+:root[data-theme="dark"] .ico-svg .g{stroke:var(--gold)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ico-svg{color:#e7ebf2}}
+.toc:not(.docs) a{grid-template-columns:52px 1fr 28px;align-items:center}
+.toc .ico{width:44px;height:44px;display:block}
+.toc:not(.docs) .sublinks{padding-left:76px}
+@media (max-width:560px){.toc:not(.docs) a{grid-template-columns:40px 1fr 20px;gap:12px}.toc .ico{width:36px;height:36px}.toc:not(.docs) .sublinks{padding-left:60px}}
+.sec-head.has-ico{display:grid;grid-template-columns:64px 1fr;gap:20px;align-items:start}
+.ico-lg{width:64px;height:64px;margin-top:20px;display:block}
+@media (max-width:560px){.sec-head.has-ico{grid-template-columns:1fr}.ico-lg{width:48px;height:48px;margin-top:8px}}
+/* title page: faint diamond lattice and a gold ring behind the portrait */
+.titlepage{position:relative;overflow:hidden;background-color:var(--navy);background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'><path d='M32 0L64 32L32 64L0 32Z' fill='none' stroke='%23ffffff' stroke-opacity='0.055' stroke-width='1'/></svg>"),linear-gradient(115deg,rgba(255,255,255,.05) 0%,rgba(255,255,255,0) 45%)}
+.titlepage::before{content:"";position:absolute;right:max(-120px,calc((100vw - 1120px)/2 - 150px));top:50%;width:560px;height:560px;transform:translateY(-50%);border:1px solid rgba(217,189,106,.28);border-radius:50%;pointer-events:none}
+.titlepage::after{content:"";position:absolute;right:max(-60px,calc((100vw - 1120px)/2 - 90px));top:50%;width:440px;height:440px;transform:translateY(-50%);border:1px solid rgba(217,189,106,.16);border-radius:50%;pointer-events:none}
+.titlepage-grid{position:relative;z-index:1}
+/* thin ornamental divider */
+.orn{display:flex;align-items:center;gap:16px;margin:48px 0 28px;color:var(--gold)}
+.orn::before,.orn::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--line))}
+.orn::after{background:linear-gradient(90deg,var(--line),transparent)}
+.orn span{width:9px;height:9px;transform:rotate(45deg);border:1.5px solid var(--gold);flex:none}
+footer{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'><path d='M32 0L64 32L32 64L0 32Z' fill='none' stroke='%23ffffff' stroke-opacity='0.04' stroke-width='1'/></svg>")}
+@media print{.titlepage::before,.titlepage::after,.orn{display:none}}
