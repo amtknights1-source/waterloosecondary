@@ -10,8 +10,8 @@
    ========================================================== */
 window.PORTFOLIO = {
   owner: {
-    name: "Beena Seepersad Vishnu",
-    shortName: "Beena Seepersad Vishnu",
+    name: "Beena Seepersad-Vishnu",
+    shortName: "Beena Seepersad-Vishnu",
     role: "Post Graduate Diploma in Education candidate",
     subjects: "Information Technology",
     email: ""
