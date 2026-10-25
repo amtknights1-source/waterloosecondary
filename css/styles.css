@@ -266,3 +266,11 @@ main{min-width:0}
 .yt-play span{display:grid;place-items:center;width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,.18);border:2px solid #fff;font-size:1.5rem}
 .yt-play:hover span{background:rgba(255,255,255,.3)}
 .yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* ---- UWI crest beside the name ---- */
+.logo-uwi{width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid var(--brand);background:#fff;flex:none;margin-left:2px}
+.logo.logo{min-width:0}
+.logo-text{min-width:0}
+@media (max-width:420px){.logo{gap:8px}.logo-uwi{width:46px;height:46px}.logo-sub{font-size:.6rem}.logo-name{font-size:.95rem}}
+@media (max-width:360px){.logo-photo,.logo-uwi{width:40px;height:40px}.logo-sub{font-size:.56rem}}
+.logo img.logo-uwi{border-radius:50%}
