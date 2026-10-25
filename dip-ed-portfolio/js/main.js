@@ -43,7 +43,7 @@
   const mail = $("#mailBtn"); if (mail && P.owner.email) { mail.href = "mailto:" + P.owner.email; mail.textContent = P.owner.email; }
 
   // ---- cards
-  const PARTS = ["A - Introduction", "B - Unit and Lesson Planning", "C - Technology Integration", "D - Growth in Assessment Component", "E - Transformations", "F - Reflective Summary"];
+  const PARTS = ["A - Introduction", "B - Unit and Lesson Planning", "C - Technology Integration", "D - Growth in Assessment Competency", "E - Transformations", "F - Reflective Summary"];
   const card = (i) => `
     <li class="doc-row">
       <a class="doc-title" href="${esc(i.page)}">${esc(i.title)}</a>
